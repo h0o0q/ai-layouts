@@ -1,0 +1,15 @@
+.hdb {
+  top: unset;
+  bottom: 0;
+}
+
+#hdb-toggle {
+  top: unset;
+  bottom: var(--hdb-offset);
+}
+
+.hdb-menu-inner {
+  top: unset;
+  padding-block-start: 50px;
+  bottom: var(--hdb-bar-size);
+}
