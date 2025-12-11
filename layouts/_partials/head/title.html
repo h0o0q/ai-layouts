@@ -1,0 +1,8 @@
+{{- /* Title generation logic */ -}}
+<title>
+  {{- if .IsHome -}}
+    {{- .Site.Title -}}
+  {{- else -}}
+    {{- .Title }} | {{ .Site.Title -}}
+  {{- end -}}
+</title>

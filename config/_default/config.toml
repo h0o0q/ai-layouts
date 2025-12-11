@@ -1,0 +1,24 @@
+baseURL = 'https://h0o0q.github.io/ai-layouts/'
+languageCode = 'en-us'
+title = 'MY LAYOUTS'
+
+disableKinds = ["taxonomy", "RSS", "sitemap"]
+enableRobotsTXT = true
+enableEmoji = true
+canonifyURLs = true
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.parser]
+      autoHeadingIDType = 'github-ascii'
+
+  [markup.tableOfContents]
+    endLevel = 2
+    ordered = false
+    startLevel = 2
+
+[imaging]
+  anchor = "center"
+
+[outputs]
+  home = ["HTML"]

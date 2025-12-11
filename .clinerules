@@ -1,0 +1,196 @@
+# Claude Configuration for AI Layouts
+
+## Project Overview
+This is a Hugo-based static site project experimenting with AI-driven web development.
+The project uses custom layouts and themes to explore different design patterns.
+
+## Architecture
+- **Framework**: Hugo static site generator (v0.152.2+)
+- **Styling**: PostCSS with PurgeCSS plugin, custom configs per layout
+- **Layouts**: Multiple layout variants (home, classic, alt, pixels)
+- **Fonts**: FontAwesome, Inter (variable), Press Start 2P (for pixels theme)
+- **Module System**: Uses Hugo modules (github.com/h0o0q/hugo-debug-bar)
+- **Build Tool**: npm (PostCSS CLI)
+- **Deployment**: GitHub Actions to GitHub Pages
+
+## File Structure
+- `/config/_default/`: Hugo configuration (TOML format)
+  - `config.toml`: Base Hugo settings
+  - `module.toml`: Hugo module imports (debug-bar)
+  - `params.toml`: Custom parameters
+- `/layouts/`: HTML templates
+  - `baseof.html`: Base template (used by home layout)
+  - `home.html`, `classic.html`, `alt.html`, `pixels.html`: Layout variants
+  - `_partials/`: Reusable template components
+    - `head.html`: Meta tags and title logic
+    - `head/css.html`: CSS loading (home layout only)
+    - `head/fonts/preload/`: Font preloading partials
+- `/assets/css/`: Source stylesheets (processed by Hugo Pipes)
+  - `home/styles.css`: Home layout styles
+  - `one-page/styles.css`: Classic layout styles
+  - `one-page-alt/styles.css`: Alt layout styles
+  - `one-page-pixels/styles.css`: Pixels layout styles
+  - `fontawesome.css`: FontAwesome icons
+- `/content/`: Markdown content with frontmatter
+  - `_index.md`: Home page content
+  - `classic.md`, `alt.md`, `pixels.md`: Layout variant pages (specify layout in frontmatter)
+- `/postcss-config/`: PostCSS configurations
+  - `one-page.config.js`, `one-page-alt.config.js`, `one-page-pixels.config.js`
+  - Each uses PurgeCSS plugin targeting specific layout HTML
+- `/static/fonts/`: Web font files (woff2 format)
+
+## Coding Guidelines
+
+### Hugo Templates (REFACTORED)
+1. **Use shared partials** - DRY principle for common elements
+   - `partial "head/meta.html"` - Meta tags
+   - `partial "head/title.html"` - Title generation
+   - `partial "accessibility/skip-links.html"` - Accessibility
+   - `partial "site/footer.html"` - Footer with variants
+2. **Template structure**:
+   - `baseof.html` for template inheritance (home layout only)
+   - Other layouts (classic, alt, pixels) are standalone HTML files
+   - Content files specify layout via frontmatter: `layout: classic`
+3. **Partial parameters**: Pass data using `dict`
+   ```
+   {{- partial "site/footer.html" (dict "variant" "classic") -}}
+   ```
+4. Conditional rendering: `{{- if hugo.IsDevelopment -}}` for dev-only features
+5. Debug bar is always visible (commented conditional in baseof.html)
+
+### CSS & PostCSS (REFACTORED)
+1. **Shared base CSS** - DRY principle:
+   - `assets/css/base/reset.css` - CSS reset & skip-link styles
+   - `assets/css/base/fonts-inter.css` - Inter font declarations
+   - `assets/css/base/fonts-pressstart2p.css` - Press Start 2P fonts
+2. **Import base files** in layout CSS:
+   ```css
+   @import "../base/reset.css";
+   @import "../base/fonts-inter.css";
+   ```
+3. **PostCSS configs** now include:
+   - Autoprefixer for browser compatibility
+   - PurgeCSS with safelist for dynamic classes
+   - Content paths include partials: `./layouts/_partials/**/*.html`
+4. **CSS loading**:
+   - Home layout: Simple via `head/css.html` partial
+   - Other layouts: Use `head/css-onepage.html` partial with parameters
+5. Use `absURL` for asset paths to ensure proper GitHub Pages URLs
+
+### Code Quality & Linting
+1. **Stylelint** - CSS linting with standard config
+   - Run: `npm run lint:css` or `npm run lint:css:fix`
+2. **HTMLHint** - HTML validation
+   - Run: `npm run lint:html`
+3. **Prettier** - Code formatting
+   - Run: `npm run format` or `npm run format:check`
+4. **All linters**: `npm run lint`
+5. Configured files:
+   - `.stylelintrc.json` - Stylelint rules
+   - `.htmlhintrc` - HTMLHint rules
+   - `.prettierrc.json` - Prettier config
+
+### Fonts
+1. Font files stored in `/static/fonts/` (served directly)
+2. Preload critical fonts via partials:
+   - Inter: classic, alt layouts
+   - Press Start 2P: pixels layout
+   - FontAwesome: classic, alt, pixels (conditional in pixels)
+3. Font loading strategy: preload + font-face in CSS
+
+### Accessibility
+1. Include skip links: "Skip to menu" and "Skip to main content"
+2. Proper heading hierarchy (h1 → h2 → h3)
+3. ARIA labels on interactive elements
+4. Semantic HTML5 elements (header, nav, main, section, footer)
+5. Test keyboard navigation
+
+### Configuration
+1. All config in TOML format
+2. Use Hugo's `_default` folder convention
+3. Custom parameters go in `params.toml`
+4. Module imports in `module.toml`
+
+## AI Development Notes
+- This is an experimental project exploring AI-assisted development
+- Focus on clean, maintainable code despite experimental nature
+- Debug bar is visible for development (should not be in production)
+- Dummy content inspired by AI development discussions
+
+## Commands
+- **Install**: `npm i` (installs all dependencies including linters)
+- **Development**: `hugo server` (live reload, draft content visible)
+- **Build**: `hugo` (production build to `/public/`)
+- **Linting**:
+  - `npm run lint` - Run all linters
+  - `npm run lint:css` - Check CSS
+  - `npm run lint:css:fix` - Fix CSS issues
+  - `npm run lint:html` - Check HTML
+- **Formatting**:
+  - `npm run format` - Format all files
+  - `npm run format:check` - Check formatting
+- **PostCSS Help**: `npm run help` (shows PostCSS CLI options)
+
+## Hugo Pipes & Asset Processing
+1. Hugo processes CSS through PostCSS during build
+2. Each layout specifies its PostCSS config in template
+3. Pipeline: CSS source → PostCSS → PurgeCSS → Minify → Output
+4. Resources loaded via `resources.Get "css/..."`
+5. Font URLs in CSS are relative: `../../fonts/`
+
+## Debug Bar (Hugo Module)
+- Module: `github.com/h0o0q/hugo-debug-bar`
+- Loaded in all layouts via: `{{- partial "debug-bar/main.html" . -}}`
+- Shows development info (currently always visible)
+- Position configurable via params.toml: `[HDB] position = "bottom"`
+
+## Deployment (GitHub Actions)
+- **Workflow**: `.github/workflows/hugo.yml`
+- **Trigger**: Push to main branch or manual dispatch
+- **Hugo Version**: 0.152.2 (extended)
+- **Process**:
+  1. Install Hugo CLI and Dart Sass
+  2. Checkout with submodules
+  3. Install npm dependencies
+  4. Build Hugo site
+  5. Deploy to GitHub Pages
+- **Output**: `https://h0o0q.github.io/ai-layouts/`
+- **Note**: Uses `canonifyURLs = true` for proper URL handling
+
+## Layout Variants
+1. **Home** (`home.html` + `baseof.html`)
+   - Simple design, uses base template
+   - Table of contents navigation
+   - Links to other layout variants
+   
+2. **Classic** (`classic.html`)
+   - One-page layout with smooth scrolling
+   - Sections: services, about, testimonials, metrics, portfolio, contact
+   - Skip links for accessibility
+   - Gradient text effects
+   
+3. **Alt** (`alt.html`)
+   - Alternative one-page design
+   - Container-based layout
+   - Similar sections to classic
+   
+4. **Pixels** (`pixels.html`)
+   - Pixel-art/retro aesthetic
+   - Press Start 2P font
+   - Triangle symbols for navigation
+   - Simpler section structure
+
+## Content Strategy
+- All layouts use satirical "AI-coded" dummy content
+- Inspired by "vibe-coded.lol" Hacker News rant
+- Intentionally humorous about AI development practices
+- Each content file specifies its layout via frontmatter
+
+## Current Status
+- **REFACTORED**: Theme now follows DRY principles with shared partials
+- Linters configured: Stylelint, HTMLHint, Prettier
+- PostCSS optimized with autoprefixer and improved PurgeCSS
+- See `REFACTORING.md` for complete documentation
+- Active experimentation with local agents and enriched context
+- Focus: Testing AI-assisted development with proper tooling
+- This project deliberately explores AI development patterns

@@ -1,0 +1,12 @@
+{{- /* Icon wrapper partial - handles sizing and styling */ -}}
+{{- $icon := .icon | default "bolt" -}}
+{{- $size := .size | default "1x" -}}
+{{- $class := .class | default "" -}}
+{{- $label := .label | default "" -}}
+
+{{- $sizeMap := dict "1x" "1em" "2x" "2em" "3x" "3em" -}}
+{{- $width := index $sizeMap $size | default "1em" -}}
+
+<i class="svg-icon {{ $class }}" style="width: {{ $width }}; height: {{ $width }}; display: inline-block; vertical-align: middle;"{{- if $label }} aria-label="{{ $label }}"{{- end }}>
+  {{- partial (printf "icons/%s.html" $icon) . -}}
+</i>

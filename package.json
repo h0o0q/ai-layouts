@@ -1,0 +1,27 @@
+{
+  "name": "Layouts",
+  "version": "1.4.0",
+  "type": "module",
+  "scripts": {
+    "help": "postcss --help",
+    "lint:css": "stylelint \"assets/css/**/*.css\"",
+    "lint:css:fix": "stylelint \"assets/css/**/*.css\" --fix",
+    "lint:html": "htmlhint \"layouts/**/*.html\"",
+    "lint": "npm run lint:css && npm run lint:html",
+    "lint:fix": "npm run lint:css:fix",
+    "format": "prettier --write \"**/*.{css,html,md,json,js}\"",
+    "format:check": "prettier --check \"**/*.{css,html,md,json,js}\""
+  },
+  "devDependencies": {
+    "@fullhuman/postcss-purgecss": "^7.0.2",
+    "autoprefixer": "^10.4.20",
+    "cssnano": "^7.0.6",
+    "htmlhint": "^1.1.4",
+    "postcss": "^8.4.49",
+    "postcss-cli": "^11.0.1",
+    "postcss-import": "^16.1.0",
+    "prettier": "^3.4.2",
+    "stylelint": "^16.10.0",
+    "stylelint-config-standard": "^36.0.1"
+  }
+}

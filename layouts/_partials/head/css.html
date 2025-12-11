@@ -1,0 +1,4 @@
+{{- with resources.Get "css/home/styles.css" }}
+  {{- $styles := . }}
+  <link rel="stylesheet" href="{{ $styles.RelPermalink }}">
+{{- end }}

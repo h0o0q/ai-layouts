@@ -1,0 +1,23 @@
+{{- define "header" }}
+  <h1>{{ .Site.Title }}</h1>
+  <nav class="_nav-menu">
+    {{- .TableOfContents -}}
+  </nav>
+{{- end }}
+
+{{- define "main" }}
+  <h2>Themes</h2>
+  {{- with .Site.RegularPages -}}
+    <ul class="_menu">
+    {{- range . -}}
+      <li class="_menu-item">
+        <a class="_menu-link" href="{{ .RelPermalink }}" title="{{ .Title }}">
+          {{ .Title }}
+        </a>
+      </li>
+    {{- end -}}
+    </ul>
+  {{- end -}}
+
+  {{ .Content }}
+{{- end }}

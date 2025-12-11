@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>{{ .Title }} - One-page Alt</title>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  {{- partial "head/fonts/preload/inter.html" . -}}
+  
+  {{- $dict := dict "config" "postcss-config/one-page-alt.config.js" }}
+  {{- with resources.Get "css/one-page-alt/styles.css" }}
+    {{- $styles := . | postCSS $dict | minify }}
+    <link rel="stylesheet" href="{{ $styles.Permalink | absURL }}">
+  {{- end }}
+  <link rel="icon" type="image/png" href="{{ "favicon.ico" | absURL }}">
+  <meta name="robots" content="noindex">
+</head>
+
+<body id="top-page" class="{{- if hugo.IsDevelopment -}}dev{{- else -}}prod{{- end -}}">
+  <div class="container">
+    <a class="skip-link" href="#nav-menu">Skip to menu</a>
+    <a class="skip-link" href="#main-content">Skip to main content</a>
+
+    <header class="site-header">
+      <h1>Hey Look, It's partly <span class="gradient-text">AI-Coded</span></h1>
+      <p>
+          Lovingly crafted by it.
+      </p>
+    </header>
+
+    <nav id="nav-menu" class="navbar">
+      <ul class="nav-dropdown" id="nav-dropdown">
+        <li><a href="#about">About</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#testimonials">Proof</a></li>
+        <li><a href="#portfolio">Work</a></li>
+        <li><a href="#contact">DM Me</a></li>
+      </ul>
+    </nav>
+
+    <main id="main-content" class="site-main">
+      <section id="services" class="section services">
+        <h2 class="section-heading title-box services-title">✨ Revolutionary</h2>
+        <div class="service-box">
+            {{- partial "icon.html" (dict "icon" "magic" "size" "3x") -}}
+            <h3 class="service-box-title">AI Did Everything</h3>
+            <p class="service-box-text">Why understand your own code when it can hallucinate it for you? Just keep clicking until something works!</p>
+        </div>
+        <div class="service-box">
+            {{- partial "icon.html" (dict "icon" "copy" "size" "3x") -}}
+            <h3 class="service-box-title">Copy-Paste Excellence</h3>
+            <p class="service-box-text">We use the revolutionary technique of copying code we don't understand and hoping it works. Shipped in record time!</p>
+        </div>
+        <div class="service-box">
+            {{- partial "icon.html" (dict "icon" "laptop" "size" "3x") -}}
+            <h3 class="service-box-title">Works On My Machine</h3>
+            <p class="service-box-text">Tested extensively on localhost once. Users reporting bugs? Just ask the AI to fix it without understanding the root cause!</p>
+        </div>
+        <div class="service-box">
+            {{- partial "icon.html" (dict "icon" "bolt" "size" "3x") -}}
+            <h3 class="service-box-title">Zero Planning</h3>
+            <p class="service-box-text">Architecture? Nah bro, we just vibe with it. Keep clicking until something works.</p>
+        </div>
+        <div class="service-box">
+            {{- partial "icon.html" (dict "icon" "bolt" "size" "3x") -}}
+            <h3 class="service-box-title">Zero Planning</h3>
+            <p class="service-box-text">Same thing, but better the 2nd time. Just ask the AI.</p>
+        </div>
+      </section>
+      <div class="group">
+        <section class="section about" id="about">
+          <h2 class="section-heading">About Us</h2>
+          <p>At company, we're passionate about startups and absolutely love our customers. We're on a mission to disrupt the industry with our innovative solutions that leverage cutting-edge AI technology.</p>
+          <a href="#testimonials" class="btn btn-primary">Read testimonials</a>
+        </section>
+        <div class="section-q" aria-hidden="true">
+          <i class="fab fa-adn"></i>
+        </div>
+      </div>
+      <section id="testimonials" class="section testimonials">
+        <h2 class="section-heading title-box testimonials-title">🌟 What Our Customers Say</h2>
+        <article class="testimonials-item">
+          <p>
+              "This product changed my life! I can't say exactly how, but the landing page looked so professional that I had to buy it. 10/10."
+          </p>
+          <p>— Sarah M.</p>
+          <p>CEO at [[CUSTOMER_COMPANY_1]]</p>
+        </article>
+        <article class="testimonials-item">
+          <p>
+              "Absolutely revolutionary! I have no idea what it does, but the gradient buttons convinced me this was the future. We immediately deployed it to production."
+          </p>
+          <p>— Michael R.</p>
+          <p>CTO at [Object Object]</p>
+        </article>
+        <article class="testimonials-item">
+            <p>
+                "The best undefined solution I've ever NaN! Our ROI increased by null% in just undefined weeks. Highly recommend to anyone looking for something!"
+            </p>
+            <p>— Jennifer K.</p>
+            <p>Founder at TechCorp Solutions Inc.</p>
+        </article>
+        <article class="testimonials-item">
+            <p>
+                "The best undefined solution I've ever NaN! Our ROI increased by null% in just undefined weeks. Highly recommend to anyone looking for something!"
+            </p>
+            <p>— Jennifer K.</p>
+            <p>Founder at TechCorp Solutions Inc.</p>
+        </article>
+        <article class="testimonials-item">
+            <p>
+                "The best undefined solution I've ever NaN! Our ROI increased by null% in just undefined weeks. Highly recommend to anyone looking for something!"
+            </p>
+            <p>— Jennifer K.</p>
+            <p>Founder at TechCorp Solutions Inc.</p>
+        </article>
+      </section>
+      <section id="metrics" class="section metrics">
+        <h2 class="section-heading"> Our Incredible Metrics</h2>
+        <div class="metrics-grid">
+          <div class="metrics-item">
+              <h3>99.9%</h3>
+              <p>Uptime*</p>
+              <p>*When localhost is running</p>
+          </div>
+          <div class="metrics-item">
+              <h3>10x</h3>
+              <p>Faster Development</p>
+              <p>Than actually learning to code</p>
+          </div>
+          <div class="metrics-item">
+              <h3>∞</h3>
+              <p>Potential Bugs</p>
+              <p>We don't test, we iterate</p>
+          </div>
+          <div class="metrics-item">
+              <h3>420%</h3>
+              <p>AI-Powered</p>
+              <p>Whatever that means</p>
+          </div>
+          <div class="metrics-item">
+              <h3>$0</h3>
+              <p>Revenue</p>
+              <p>But we're pre-revenue by choice</p>
+          </div>
+          <div class="metrics-item">
+              <h3>NaN</h3>
+              <p>Customer Satisfaction</p>
+              <p>Cannot divide by zero customers</p>
+          </div>
+          <div class="metrics-item">
+              <h3>1</h3>
+              <p>Developer</p>
+              <p>it doesn't count as an employee</p>
+          </div>
+          <div class="metrics-item">
+              <h3>69</h3>
+              <p>Prompts to Build This</p>
+              <p>Nice</p>
+          </div>
+          <div class="metrics-item">
+              <h3>69</h3>
+              <p>Prompts to Build This</p>
+              <p>Nice</p>
+          </div>
+          <div class="metrics-item">
+              <h3>NaN</h3>
+              <p>Customer Satisfaction</p>
+              <p>Cannot divide by zero customers</p>
+          </div>
+        </div>
+      </section>
+      <div class="group">
+        <div class="section-q">
+          <i class="fa fa-code"></i>
+        </div>
+        <section class="section learn" id="learn">
+            <h2 class="section-heading">Want to actually learn to code yourself?</h2>
+            <p>Who would ever want to put in all of that effort to understand what they're building?</p>
+            <a href="#contact" class="btn btn-primary">Just Ask it Bro</a>
+        </section>
+      </div>
+      <section class="section portfolio" id="portfolio">
+        <h2 class="section-heading title-box">Our work</h2>
+        <figure class="portfolio-item">
+          <img width="650" height="350" loading="lazy" src="/img/pic1.jpg" class="" alt="">
+          <figcaption class="portfolio-caption">
+            <span class="project-category">
+                Generic Thing
+            </span>
+            <span>
+                AI Generated
+            </span>
+          </figcaption>
+        </figure>
+        <figure class="portfolio-item">
+          <img width="650" height="350" loading="lazy" src="/img/pic2.jpg" class="" alt="">
+          <figcaption class="portfolio-caption">
+            <span class="project-category">
+                Generic Thing
+            </span>
+            <span>
+                AI Generated
+            </span>
+          </figcaption>
+        </figure>
+        <figure class="portfolio-item">
+          <img width="650" height="350" loading="lazy" src="/img/pic3.jpg" class="" alt="">
+          <figcaption class="portfolio-caption">
+            <span class="project-category">
+                Generic Thing
+            </span>
+            <span>
+                AI Generated
+            </span>
+          </figcaption>
+        </figure>
+        <figure class="portfolio-item">
+          <img width="650" height="350" loading="lazy" src="/img/pic4.jpg" class="" alt="">
+          <figcaption class="portfolio-caption">
+            <span class="project-category">
+                Generic Thing
+            </span>
+            <span>
+                AI Generated
+            </span>
+          </figcaption>
+        </figure>
+        <figure class="portfolio-item">
+          <img width="650" height="350" loading="lazy" src="/img/pic5.jpg"class="" alt="">
+          <figcaption class="portfolio-caption">
+            <span class="project-category">
+                Generic Thing
+            </span>
+            <span>
+                AI Generated
+            </span>
+          </figcaption>
+        </figure>
+        <figure class="portfolio-item">
+          <img width="650" height="350" loading="lazy" src="/img/pic1.jpg"class="" alt="">
+          <figcaption class="portfolio-caption">
+            <span class="project-category">
+                Generic Thing
+            </span>
+            <span>
+                AI Generated
+            </span>
+          </figcaption>
+        </figure>
+        <figure class="portfolio-item">
+          <img width="650" height="350" loading="lazy" src="/img/pic2.jpg"class="" alt="">
+          <figcaption class="portfolio-caption">
+            <span class="project-category">
+                Generic Thing
+            </span>
+            <span>
+                AI Generated
+            </span>
+          </figcaption>
+        </figure>
+      </section>
+      <section id="contact" class="section contact">
+        <div class="contact-box">
+          <h2 class="info-title section-heading -">Contact</h2>
+
+          <figure class="info-image"><img width="650" height="350" loading="lazy" src="/img/pic5.jpg" alt=""></figure>
+
+          <div class="contact-infos socials">
+            <p>Platforms:</p>
+            <a href="#" aria-label="Sell your laptop"><i class="fa fa-laptop"></i></a>
+            <a href="#" aria-label="Buy Apple"><i class="fa-brands fa-apple"></i></a>
+            <a href="#" aria-label="Install Linux"><i class="fa-brands fa-linux"></i> </a>
+            <a href="#" aria-label="Windows"><i class="fa-brands fa-windows"></i> </a>
+            <a href="#" aria-label="subscribe to my YouTube channel"><i class="fa-brands fa-youtube"></i></a>
+            <a href="#" aria-label="discuss with me on Stackoverflow"><i class="fa-brands fa-stack-overflow"></i></a>
+            <a href="#" aria-label="on VK"><i class="fa-brands fa-vk"></i></a>
+            <a href="#" aria-label="retweet me"><i class="fa fa-retweet"></i></a>
+            <a href="#" aria-label="join me on LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
+            <a href="#" aria-label="give me your Bitcoins"><i class="fa-brands fa-bitcoin"></i></a>
+            <a href="#" aria-label="buy me a beer"><i class="fa fa-beer"></i> </a>
+          </div>
+
+          <div class="info-text">
+            <ul class="contact-infos alt">
+              <li>
+                <a href="tel:+1-555-PROMPT-ME">
+                  <i class="fa fa-phone"></i> Call us</a>
+              </li>
+              <li>
+                <a href="mailto:novibe@only.dev">
+                  <i class="fa fa-envelope-circle-check"></i> novibe<span class="brackets">{</span>at<span class="brackets">}</span>only.dev
+                </a>
+              </li>
+              <li>
+                <a href="#">
+                  <i class="fa fa-hotel"></i> Book it!
+                </a>
+              </li>
+              <li>
+                <i class="fa fa-server"></i> AI Generated content
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer id="footer" class="site-footer">
+      <span>&copy; 2025 Nobody. </span><a href="#top-page" aria-label="Top page"><i class="fa fa-arrow-circle-up"></i></a>
+    </footer>
+  </div>
+
+  {{- /* if hugo.IsDevelopment */}}
+    {{- partial "debug-bar/main.html" . -}}
+  {{- /* end */ -}}
+</body>
+</html>

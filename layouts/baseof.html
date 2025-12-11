@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  {{- partial "head.html" . -}}
+  </head>
+
+  <body class="home{{ if hugo.IsDevelopment }} dev{{ else }} prod{{- end -}}">
+    <header class="_header">
+      {{ block "header" . }}
+        <h1>{{ .Title }}</h1>
+      {{ end }}
+    </header>
+
+    <main class="_content">
+      {{ block "main" . }}{{ end }}
+    </main>
+
+    <footer class="_footer">&copy; Copyright {{ now.Year }}. All rights reserved.</footer>
+    
+    {{- /* if hugo.IsDevelopment */}}
+      {{- partial "debug-bar/main.html" . -}}
+    {{- /* end */ -}}
+  </body>
+</html>

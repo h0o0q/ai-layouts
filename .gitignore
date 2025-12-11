@@ -1,0 +1,23 @@
+# Ignore test files
+*.test
+
+# Ignore files starting with imports.
+imports.*
+
+# Ignore all CSS files in any "dist" directory (at any depth)
+**/dist/**/*.css
+
+# Ignore public folder
+public/
+
+# Ignore macOS system files everywhere
+.DS_Store
+**/.DS_Store
+**/._.DS_Store
+
+# Ignore node_modules folder
+node_modules/
+
+# Ignore Hugo's cache
+resources/
+_vendor/

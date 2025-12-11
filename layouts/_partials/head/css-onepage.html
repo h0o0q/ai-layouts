@@ -1,0 +1,10 @@
+{{- /* CSS loading for one-page layouts with PostCSS processing */ -}}
+{{- $layoutName := .layoutName | default "one-page" -}}
+{{- $configPath := printf "postcss-config/%s.config.js" $layoutName -}}
+{{- $cssPath := printf "css/%s/styles.css" $layoutName -}}
+
+{{- $dict := dict "config" $configPath }}
+{{- with resources.Get $cssPath }}
+  {{- $styles := . | postCSS $dict | minify }}
+  <link rel="stylesheet" href="{{ $styles.Permalink | absURL }}">
+{{- end }}

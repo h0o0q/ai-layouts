@@ -1,0 +1,27 @@
+version: 2
+updates:
+- package-ecosystem: npm
+  directory: "/"
+  schedule:
+    interval: daily
+    time: '11:00'
+    timezone: Europe/Berlin
+  labels:
+  - "dependencies"
+  allow:
+  - dependency-type: "production"
+  commit-message:
+    prefix: deps
+
+- package-ecosystem: "github-actions"
+  directory: "/"
+  schedule:
+    interval: "daily"
+    time: '11:00'
+    timezone: Europe/Berlin
+  labels:
+  - "dependencies"
+  allow:
+  - dependency-type: "production"
+  commit-message:
+    prefix: deps

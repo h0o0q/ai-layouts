@@ -1,0 +1,5 @@
+custom_param = "lol"
+
+[HDB]
+	position = "bottom" # either "bottom" or "top" (default position is "top")
+

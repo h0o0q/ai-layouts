@@ -1,0 +1,20 @@
+{{- /* Site footer - shared across layouts */ -}}
+{{- $variant := .variant | default "default" -}}
+
+{{- if eq $variant "classic" }}
+<footer class="site-footer">
+  <p>&copy; {{ now.Year }} Nobody. <a href="#top-page"><i class="fa fa-arrow-circle-up fa-2x" aria-label="Top page"></i></a></p>
+</footer>
+{{- else if eq $variant "alt" }}
+<footer id="footer" class="site-footer">
+  <span>&copy; {{ now.Year }} Nobody. </span><a href="#top-page" aria-label="Top page"><i class="fa fa-arrow-circle-up"></i></a>
+</footer>
+{{- else if eq $variant "pixels" }}
+<footer class="site-footer">
+  <p class="copyright"><span>&copy; {{ now.Year }} Nobody</span>, <span>we Value Your Privacy</span></p>
+  <button class="disappear btn-primary">Accept</button>
+  <a href="#page-top"><span class="triangle reverse" aria-hidden="true">▼</span>Top page<span class="triangle reverse" aria-hidden="true">▼</span></a>
+</footer>
+{{- else }}
+<footer class="_footer">&copy; Copyright {{ now.Year }}. All rights reserved.</footer>
+{{- end }}
